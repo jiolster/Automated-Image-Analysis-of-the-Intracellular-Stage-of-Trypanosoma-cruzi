@@ -2,3 +2,6 @@
 Repository of the scripts used for the publication "Automated Image Analysis of the Intracellular Stage of Trypanosoma cruzi", at the Signaling and Adaptive Mechanisms in Trypanosomatids Laboratory.
 
 Google colab: https://colab.research.google.com/drive/1Kq2KOyyEwfJ-lLXDBHLaOmFY2WQ6r1S8?usp=sharing
+
+The trained for this work are available on Hugging Face:
+https://huggingface.co/jiolster/Automated-Image-Analysis-of-the-Intracellular-Stage-of-Trypanosoma-cruzi/tree/main
