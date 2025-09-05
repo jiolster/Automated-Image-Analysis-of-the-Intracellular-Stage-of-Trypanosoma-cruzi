@@ -217,6 +217,10 @@ model_Nuc= models.CellposeModel(gpu=True, pretrained_model="DAPI_Nuc")  #Model t
 masks_Tc, flows_Tc, styles_Tc = model_Tc.eval(imgs)
 masks_Nuc, flows_Nuc, styles_Nuc = model_Nuc.eval(imgs)
 
+sep = "-" #Character used to separate the variables 
+
+num_variables = 3 # Numeber of variables used to identify the images
+sep = "-" #Character used to separate the variables 
 
 #Columns for the output table of Average FOV measurments
 #List of lists, each row corresponds to the measurments for a field of view
@@ -232,15 +236,14 @@ fov_results = [fov_head]
 for im in range(len(imgs)):  
 
     #image_conditions = fields.split("-")
-    conditions = fields[im].split("-")
+    conditions = fields[im].split(sep) #The value for each of the variables used to identify the image, as a list
     
-    
+    #Region properties for each segmented object, used to get the centroid
     Nuclei_props = measure.regionprops(masks_Nuc[im])
     amastigote_props = measure.regionprops(masks_Tc[im])
     
-    
     #Measure the distance of each amastigote to each nucleus, then save which nucleus is the closest to each amastigote
-    amastigotes_in_cell, sc_results_partial, fov_row, pairs, percent_infected, amastigotes_per_infected = find_infected(amastigote_props, Nuclei_props, 3, conditions)
+    amastigotes_in_cell, sc_results_partial, fov_row, pairs, percent_infected, amastigotes_per_infected = find_infected(amastigote_props, Nuclei_props, num_variables, conditions)
     
     #Save current image's measurments
     fov_results.append(fov_row)
